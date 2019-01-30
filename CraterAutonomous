@@ -120,35 +120,8 @@ public class CraterAutonomous extends LinearOpMode {
 
         // loop and read the RGB and distance data.
         // Note we use opModeIsActive() as our loop condition because it is an interruptible method.
-        while (opModeIsActive()) {
-            
-            // convert the RGB values to HSV values.
-            // multiply by the SCALE_FACTOR.
-            // then cast it back to int (SCALE_FACTOR is a double)
-            Color.RGBToHSV((int) (sensorColor.red() * SCALE_FACTOR),
-                    (int) (sensorColor.green() * SCALE_FACTOR),
-                    (int) (sensorColor.blue() * SCALE_FACTOR),
-                    hsvValues);
+        if(opModeIsActive()) {
 
-            // send the info back to driver station using telemetry function.
-            //telemetry.addData("Distance (cm)",
-                    //String.format(Locale.US, "%.02f", sensorDistance.getDistance(DistanceUnit.CM)));
-            telemetry.addData("Alpha", sensorColor.alpha());
-            telemetry.addData("Red  ", sensorColor.red());
-            telemetry.addData("Green", sensorColor.green());
-            telemetry.addData("Blue ", sensorColor.blue());
-            telemetry.addData("Hue", hsvValues[0]);
-
-            // change the background color to match the color detected by the RGB sensor.
-            // pass a reference to the hue, saturation, and value array as an argument
-            // to the HSVToColor method.
-            relativeLayout.post(new Runnable() {
-                public void run() {
-                    relativeLayout.setBackgroundColor(Color.HSVToColor(0xff, values));
-                }
-            });
-
-            telemetry.update();
             
             walle.motorLeft  = hardwareMap.get(DcMotor.class, "motorLeft");
             walle.motorRight = hardwareMap.get(DcMotor.class, "motorRight");
@@ -159,19 +132,48 @@ public class CraterAutonomous extends LinearOpMode {
         
           
         
-          walle.mineralUp();
-          walle.walleUp();   
-          walle.armUp(11.6);
-          walle.leftTurn(1);
-          walle.armDown(5);
-          walle.rightTurn(1);
-          walle.forward(1.1);
-          walle.leftTurn(1);
-          walle.reverse(.7);
+            walle.mineralUp();
+            walle.walleUp();   
+            walle.armUp(11.6);
+            walle.leftTurn(1);
+            walle.armDown(5);
+            walle.rightTurn(1);
+            walle.forward(1.1);
+            walle.leftTurn(1);
+            walle.reverse(.7);
           
           
             
             for(int i = 0; i < 1; i++){ 
+                            
+                // convert the RGB values to HSV values.
+                // multiply by the SCALE_FACTOR.
+                // then cast it back to int (SCALE_FACTOR is a double)
+                Color.RGBToHSV((int) (sensorColor.red() * SCALE_FACTOR),
+                        (int) (sensorColor.green() * SCALE_FACTOR),
+                        (int) (sensorColor.blue() * SCALE_FACTOR),
+                        hsvValues);
+
+                // send the info back to driver station using telemetry function.
+                //telemetry.addData("Distance (cm)",
+                        //String.format(Locale.US, "%.02f", sensorDistance.getDistance(DistanceUnit.CM)));
+                telemetry.addData("Alpha", sensorColor.alpha());
+                telemetry.addData("Red  ", sensorColor.red());
+                telemetry.addData("Green", sensorColor.green());
+                telemetry.addData("Blue ", sensorColor.blue());
+                telemetry.addData("Hue", hsvValues[0]);
+
+                // change the background color to match the color detected by the RGB sensor.
+                // pass a reference to the hue, saturation, and value array as an argument
+                // to the HSVToColor method.
+                relativeLayout.post(new Runnable() {
+                    public void run() {
+                        relativeLayout.setBackgroundColor(Color.HSVToColor(0xff, values));
+                    }
+                });
+
+                telemetry.update();
+
                 timer.reset();
                 while(timer.time() > 0 && timer.time() < 2){
                     telemetry.addData("HSV: ", hsvValues[0]);
@@ -218,5 +220,3 @@ public class CraterAutonomous extends LinearOpMode {
     }
     
 }
-
-
