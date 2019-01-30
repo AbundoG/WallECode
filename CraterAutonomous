@@ -120,7 +120,7 @@ public class CraterAutonomous extends LinearOpMode {
 
         // loop and read the RGB and distance data.
         // Note we use opModeIsActive() as our loop condition because it is an interruptible method.
-        while (opModeIsActive()) {
+        if(opModeIsActive()) {
 
             
             walle.motorLeft  = hardwareMap.get(DcMotor.class, "motorLeft");
