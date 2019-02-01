@@ -134,17 +134,18 @@ public class CraterAutonomous extends LinearOpMode {
         
             walle.mineralUp();
             walle.walleUp();   
-            walle.armUp(11.6);
-            walle.leftTurn(1);
+            walle.armUp(10.9);
+            walle.leftTurn(.50);
             walle.armDown(5);
-            walle.rightTurn(1);
-            walle.forward(1.1);
-            walle.leftTurn(1);
-            walle.reverse(.7);
+            walle.rightTurn(.50);
+            walle.forward(1.05);
+            walle.leftTurn(.99);
+            walle.reverse(.735);
+            walle.mineralDown;
           
           
             
-            for(int i = 0; i < 1; i++){ 
+            for(int i = 0; i < 2; i++){ 
                             
                 // convert the RGB values to HSV values.
                 // multiply by the SCALE_FACTOR.
@@ -177,14 +178,14 @@ public class CraterAutonomous extends LinearOpMode {
                 timer.reset();
                 while(timer.time() > 0 && timer.time() < 2){
                     telemetry.addData("HSV: ", hsvValues[0]);
-                    if ((hsvValues[0] < 90 && (hsvValues[0] > 40))) {
-                        walle.mineralDown();
+                    if (!(hsvValues[0] < 90 && (hsvValues[0] > 40))) {
+                        walle.mineralUp();
                     }
                 }
                 
                 do{
                     walle.forward(.75);
-                    walle.mineralUp();
+                    walle.mineralDown();
                 } while(false);
             }
             
