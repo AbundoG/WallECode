@@ -1,4 +1,4 @@
-/* Copyright (c) 2017 FIRST. All rights reserved.
+/* Copyright (c) 2019 FIRST. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted (subject to the limitations in the disclaimer below) provided that
@@ -65,23 +65,6 @@ import java.util.Locale;
 
 public class CraterAutonomous extends LinearOpMode {
 
-    /**
-     * Note that the REV Robotics Color-Distance incorporates two sensors into one device.
-     * It has a light/distance (range) sensor.  It also has an RGB color sensor.
-     * The light/distance sensor saturates at around 2" (5cm).  This means that targets that are 2"
-     * or closer will display the same value for distance/light detected.
-     *
-     * Although you configure a single REV Robotics Color-Distance sensor in your configuration file,
-     * you can treat the sensor as two separate sensors that share the same name in your op mode.
-     *
-     * In this example, we represent the detected color by a hue, saturation, and value color
-     * model (see https://en.wikipedia.org/wiki/HSL_and_HSV).  We change the background
-     * color of the screen to match the detected color.
-     *
-     * In this example, we  also use the distance sensor to display the distance
-     * to the target object.  Note that the distance sensor saturates at around 2" (5 cm).
-     *
-     */
     ColorSensor sensorColor;
     //DistanceSensor sensorDistance;
 
@@ -120,18 +103,15 @@ public class CraterAutonomous extends LinearOpMode {
 
         // loop and read the RGB and distance data.
         // Note we use opModeIsActive() as our loop condition because it is an interruptible method.
-        if(opModeIsActive()) {
-
-            
+        while(opModeIsActive()) {
+        
             walle.motorLeft  = hardwareMap.get(DcMotor.class, "motorLeft");
             walle.motorRight = hardwareMap.get(DcMotor.class, "motorRight");
             walle.motorArm  = hardwareMap.get(DcMotor.class, "motorArm");
             walle.servoMarker = hardwareMap.get(Servo.class, "servoMarker");
             walle.servoMineral = hardwareMap.get(Servo.class, "servoMineral");
         
-        
-          
-        
+        //Start movement of the bot:
             walle.mineralUp();
             walle.walleUp();   
             walle.armUp(11.6);
@@ -141,11 +121,7 @@ public class CraterAutonomous extends LinearOpMode {
             walle.forward(1.1);
             walle.leftTurn(1);
             walle.reverse(.7);
-          
-          
-            
-            for(int i = 0; i < 1; i++){ 
-                            
+           
                 // convert the RGB values to HSV values.
                 // multiply by the SCALE_FACTOR.
                 // then cast it back to int (SCALE_FACTOR is a double)
@@ -170,7 +146,7 @@ public class CraterAutonomous extends LinearOpMode {
                     public void run() {
                         relativeLayout.setBackgroundColor(Color.HSVToColor(0xff, values));
                     }
-                });
+                );
 
                 telemetry.update();
 
@@ -188,8 +164,6 @@ public class CraterAutonomous extends LinearOpMode {
                 } while(false);
             }
             
-            
-
               walle.mineralUp();
               walle.brake();
               walle.forward(1);
@@ -212,7 +186,7 @@ public class CraterAutonomous extends LinearOpMode {
         // Set the panel back to the default color
         relativeLayout.post(new Runnable() {
             public void run() {
-                relativeLayout.setBackgroundColor(Color.WHITE);
+                relativeLayout.setBackgroundColor(Color.BLUE);
             }
         });
         
