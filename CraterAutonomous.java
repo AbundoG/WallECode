@@ -129,9 +129,7 @@ public class CraterAutonomous extends LinearOpMode {
             walle.servoMarker = hardwareMap.get(Servo.class, "servoMarker");
             walle.servoMineral = hardwareMap.get(Servo.class, "servoMineral");
         
-        
-          
-        
+        // Begin bot movement
             walle.mineralUp();
             walle.walleUp();   
             walle.armUp(11.6);
@@ -142,12 +140,11 @@ public class CraterAutonomous extends LinearOpMode {
             walle.leftTurn(1);
             walle.reverse(.7);
           
+          for(int i = 0; i < 3; i++) {
             checkGold();
-            checkGold();
-            checkGold();
-
-            
-            
+          }  
+          
+      //Having checked for the gold, now have the bot select it
 
             walle.mineralUp();
             walle.brake();
